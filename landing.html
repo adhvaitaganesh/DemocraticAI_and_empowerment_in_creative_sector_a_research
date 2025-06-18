@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novel Research Questions: AI & Creative Sector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Colors: Black (#000000) and White (#FFFFFF) */
+        /* Grayscale for variations: #F8F8F8, #E0E0E0, #CCCCCC, #333333, #111111 */
+        /* Accent Color: #4A90E2 (A clean blue for links/highlights) */
+
+        body {
+            font-family: 'Roboto', sans-serif; /* Primary font for body text */
+            background-color: #F8F8F8; /* Off-white background */
+            color: #333333; /* Dark gray for general text */
+            min-height: 100vh;
+            display: flex;
+            overflow-y: auto; /* Allow the entire body to scroll if content overflows */
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 280px; /* Fixed width for the sidebar */
+            background-color: #E0E0E0; /* Light gray background */
+            padding: 2rem 1.5rem;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            overflow-y: auto; /* Enable scrolling for sidebar content */
+            flex-shrink: 0; /* Prevent sidebar from shrinking */
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Ensure sidebar takes full viewport height */
+            position: sticky; /* Sticky sidebar */
+            top: 0; /* Align to the top */
+        }
+
+        .sidebar-title {
+            font-family: 'Caveat', cursive; /* Handwritten font for title */
+            font-size: 2rem; /* Larger font size */
+            font-weight: 700;
+            color: #000000; /* Black for title */
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .sidebar-nav-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            color: #333333;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+            font-size: 0.95rem;
+            border: 1px solid transparent; /* Subtle border for consistency */
+        }
+
+        .sidebar-nav-item:hover {
+            background-color: #CCCCCC; /* Darker gray on hover */
+            color: #111111; /* Darker text on hover */
+            border-color: #A0A0A0; /* Light border on hover */
+        }
+
+        .sidebar-nav-item.active {
+            background-color: #FFFFFF; /* White background for active item */
+            color: #4A90E2; /* Accent blue for active item */
+            font-weight: 600;
+            border-color: #4A90E2; /* Accent border for active item */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for active item */
+        }
+
+        /* Main Content Area */
+        .main-content-wrapper {
+            flex-grow: 1; /* Allows main content to take remaining space */
+            overflow-y: auto; /* Enable scrolling for main content */
+            padding: 2rem;
+            display: flex;
+            justify-content: center; /* Center the container within its wrapper */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 960px;
+            background-color: #FFFFFF; /* Pure white background for main content */
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            padding: 2.5rem;
+        }
+
+        /* Header Title in Main Content */
+        .header-title {
+            font-family: 'Caveat', cursive; /* Handwritten font for header */
+            font-size: 3rem; /* Adjusted for impact */
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: #000000; /* Black for title */
+        }
+
+        /* Question Card Styling */
+        .question-card {
+            background-color: #F8F8F8; /* Off-white for card background */
+            border: 1px solid #CCCCCC; /* Light gray border for definition */
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Soft, subtle shadow */
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-button {
+            width: 100%;
+            text-align: left;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.15rem; /* Slightly larger text */
+            font-weight: 500; /* Medium weight */
+            color: #333333; /* Dark gray text */
+            background-color: #E0E0E0; /* Light gray button background */
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, color 0.3s;
+            border-radius: 0.75rem;
+        }
+        .question-button:hover {
+            background-color: #CCCCCC; /* Darker gray on hover */
+            color: #000000; /* Black text on hover */
+        }
+        .question-button.active {
+            background-color: #4A90E2; /* Accent blue for active button */
+            color: #FFFFFF; /* White text for active button */
+        }
+
+        .question-details {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid #CCCCCC; /* Lighter border for separation */
+            background-color: #FFFFFF; /* White background for details content */
+            color: #333333; /* Dark gray for details text */
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+            line-height: 1.6; /* Improved line height */
+        }
+
+        .details-heading {
+            font-family: 'Caveat', cursive; /* Handwritten font for sub-headings */
+            font-size: 1.5rem; /* Larger size */
+            font-weight: 700;
+            color: #111111; /* Even darker for emphasis */
+            margin-bottom: 0.75rem;
+        }
+        .details-paragraph {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .list-item-link {
+            color: #4A90E2; /* Accent blue */
+            text-decoration: underline;
+            transition: color 0.2s ease-in-out;
+        }
+        .list-item-link:hover {
+            color: #79B8F2; /* Lighter blue on hover */
+        }
+        .additional-info-card {
+            background-color: #F0F0F0; /* Slightly darker off-white for nested cards */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Very subtle inner shadow */
+            margin-bottom: 1rem;
+            border: 1px solid #D0D0D0; /* Very light border */
+        }
+        .additional-info-card:last-child {
+          margin-bottom: 0;
+        }
+        .additional-info-title {
+            font-weight: 500; /* Medium weight */
+            color: #111111; /* Dark text for nested title */
+            margin-bottom: 0.5rem;
+        }
+        .additional-info-content {
+            line-height: 1.5;
+            color: #333333;
+            margin-bottom: 0.5rem;
+        }
+        .additional-info-source {
+            font-size: 0.8rem;
+            color: #666666; /* Medium gray for source text */
+        }
+        .additional-info-source a {
+            color: #4A90E2; /* Accent blue for source link */
+        }
+        .additional-info-source a:hover {
+            color: #79B8F2;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; /* Stack sidebar and main content on small screens */
+            }
+            .sidebar {
+                width: 100%;
+                height: auto; /* Allow sidebar to collapse height */
+                padding: 1rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                position: static; /* Remove sticky on mobile */
+            }
+            .main-content-wrapper {
+                padding: 1rem;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+            .header-title {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            .question-button {
+                font-size: 1rem;
+                padding: 1rem 1.25rem;
+            }
+            .question-details {
+                padding: 1rem 1.25rem;
+            }
+            .details-heading {
+                font-size: 1.25rem;
+            }
+            .details-paragraph {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar" id="sidebar">
+        <h2 class="sidebar-title">Research Questions</h2>
+        <nav id="sidebar-nav">
+            <!-- Sidebar navigation items will be dynamically loaded here -->
+        </nav>
+    </div>
+
+    <div class="main-content-wrapper">
+        <div class="container" id="main-container">
+            <h1 class="header-title">
+                Novel Research Questions: AI & Creative Sector
+            </h1>
+
+            <div id="questions-container">
+                <!-- Questions will be dynamically loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base path to the report hosted in the Canvas environment
+        const AI_DEMOCRATIZATION_REPORT_BASE_URL = window.location.origin + window.location.pathname + "#ai-democratization-report";
+
+        const researchQuestionsData = [
+            {
+                id: 'q1',
+                question: 'Quantifying the synergistic emergence of novel creative properties and human artistic agency within iterative co-creation processes involving multi-agent AI systems, beyond static output analysis, presents a significant challenge for dynamic, real-time metrics and adaptive evaluation frameworks.',
+                details: {
+                    scientificNovelty: 'This question moves beyond simply measuring the output of human-AI collaboration to understanding the dynamic process of creativity and the evolving role of human agency within complex multi-agent systems. It calls for the development of adaptive, real-time metrics that capture the qualitative and synergistic aspects of co-creation, rather than just static product evaluations. This builds on existing Human-AI Collaboration (HAIC) evaluation frameworks and multi-agent creative frameworks like CREA, while addressing concerns about creative homogenization.',
+                    relatedResearch: [
+                        { text: '"Evaluating Human-AI Collaboration: A Review and Methodological Framework"', link: 'https://arxiv.org/pdf/2407.19098' },
+                        { text: '"CREA: A Novel Multi-Agent Collaborative Framework for Creative Image Generation"', link: 'https://arxiv.org/html/2504.05306' },
+                        { text: '"Group Brainstorming with an AI Agent: Creating and Selecting Ideas"', link: 'https://computationalcreativity.net/iccc24/papers/ICCC24_paper_18.pdf' },
+                        { text: '"Generative AI enhances individual creativity but reduces the collective diversity of novel content"', link: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10842340/' },
+                        { text: '"The Impact of AI-Human Collaboration Models on Creativity: A Study on Search Processes and Decision-Making Dynamics"', link: 'https://aisel.aisnet.org/sais2025/20/' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'I. Executive Summary',
+                            content: 'The integration of artificial intelligence (AI) into societal frameworks presents both profound opportunities and significant challenges. This report examines two pivotal trends: the democratization of AI and the emergence of AI agentic workflows, focusing on their combined impact on the creative sector. AI democratization, at its core, represents a multi-faceted endeavor aimed at ensuring equitable access to, participation in, and benefits from AI technologies for social good. This extends beyond mere availability to encompass inclusive development and fair distribution of economic gains. Concurrently, AI agentic workflows signify a qualitative leap beyond traditional generative AI, characterized by enhanced autonomy, sophisticated reasoning, and the capacity for multi-step task execution. The convergence of these forces is profoundly reshaping creative industries. Agentic AI streamlines workflows, accelerates ideation, and fosters novel forms of artistic expression by acting as a collaborative partner rather than a mere tool. It lowers technical barriers, enabling a broader range of individuals to engage in creative pursuits, thereby expanding the creative economy\'s reach and potential. This shift is not merely technological but a fundamental socio-economic and cultural transformation. However, this evolution is not without complexities. Significant challenges include the ongoing debates surrounding intellectual property rights and authorship in AI-generated content, the potential for job redefinition and displacement within creative professions, and the critical need for robust ethical governance to mitigate algorithmic bias and ensure transparency. Navigating these issues requires a balanced, human-centric approach to ensure AI serves to augment, rather than diminish, human creativity, fostering an inclusive and sustainable creative future.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, I. Executive Summary', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#executive-summary' }
+                        },
+                        {
+                            title: 'III. AI Agentic Workflows: A New Frontier in Automation and Creativity - The Emergence of Multi-Agent Systems and Collaborative Intelligence',
+                            content: 'A defining characteristic of Agentic AI is its composition of multiple, specialized agents that are designed to coordinate, communicate, and dynamically allocate sub-tasks within a broader workflow. These systems exhibit emergent collective intelligence, which arises from their sophisticated coordination protocols and distributed task decomposition. Architectures such as CrewAI are at the forefront of this paradigm, enabling multiple AI agents to collaborate effectively, solving complex problems with enhanced creativity and decision-making by prioritizing their collective intelligence. Examples of multi-agent systems in creative applications demonstrate their transformative potential: Music: Musical agent systems like MACAT and MACataRT are specifically developed to support music performance and improvisation within co-creative environments. They enhance interactive music-making by enabling real-time collaboration between human musicians and AI. The "Revival" project, for example, showcases an innovative live audiovisual performance that seamlessly blends human and AI musicianship through real-time co-creative improvisation. Gaming: Agentic AI systems are instrumental in helping game developers create highly dynamic game worlds and Non-Player Characters (NPCs) that can react intelligently to player actions. They also facilitate the development of automated Quality Assurance agents (QAgents) that streamline testing and content creation processes, significantly improving game development efficiency. Content Generation and Marketing: Multi-agent systems are capable of generating high-quality, research-backed content for online publication. CrewAI, for instance, can be utilized for content creation in marketing, producing personalized, high-quality copy and creative assets at scale. Brainstorming: Experiments have demonstrated the effectiveness of multi-party conversational AI agents collaborating with human groups in brainstorming sessions. These studies reveal that while AI can generate a large volume of ideas, human engagement, particularly through supportive actions and collaborative efforts, remains crucial for an idea to be selected as final. This development highlights AI\'s potential to evolve beyond individual assistance, becoming a collaborative "team member" in large-scale creative projects. This mimics and augments human team dynamics, enabling the tackling of challenges that would otherwise exceed the capabilities of any single AI agent or human.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, III. AI Agentic Workflows: A New Frontier in Automation and Creativity - The Emergence of Multi-Agent Systems and Collaborative Intelligence', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#ai-agentic-workflows' }
+                        },
+                    ]
+                }
+            },
+            {
+                id: 'q2',
+                question: 'Realizing culturally-adaptive multi-agent AI systems for diverse artistic expression, particularly in authentically reflecting and integrating non-Western aesthetics from sparse datasets, presents a profound challenge for architectural design and training methodologies, necessitating human-in-the-loop cultural feedback mechanisms to prevent algorithmic appropriation.',
+                details: {
+                    scientificNovelty: 'This question addresses the critical issue of cultural bias in AI by proposing the development of AI systems that can actively learn from limited, diverse datasets (few-shot learning) and proactively adapt to cultural nuances. The emphasis on "human-in-the-loop cultural feedback" is crucial for ensuring authenticity and preventing misrepresentation, moving beyond simple bias mitigation to active cultural preservation and generation. This builds on research in culturally aware Vision-Language Models (VLMs) and culturally adaptive translation frameworks.',
+                    relatedResearch: [
+                        { text: '"Decolonising AI: Building Culturally Aware Multimodal AI"', link: 'https://www.southampton.ac.uk/news/2023/11/decolonising-ai-multi-modal.page' },
+                        { text: '"Multi-Agent AI Framework for Culturally Adaptive Translation in Underserver Language Communities"', link: 'https://arxiv.org/html/2503.04827' },
+                        { text: '"Cultural Bias in AI-Generated Imagery: A Quantitative Analysis of Compositional Fragility and Contextual Misalignment"', link: 'https://arxiv.org/abs/2505.01430' },
+                        { text: '"Leveraging Stable Diffusion for Blue-and-White Porcelain Pattern Restoration and Innovation"', link: 'https://www.mdpi.com/2075-1702/14/1/5' },
+                        { text: '"Few-Shot Learning in Computer Vision: Overcoming Data Scarcity"', link: 'https://www.researchgate.net/publication/372074351_Few-Shot_Learning_in_Computer_Vision_Overcoming_Data_Scarcity' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'V. Challenges and Ethical Implications - Risk of Creative Homogenization and Dilution of Artistic Uniqueness',
+                            content: 'A significant concern is the potential for creative homogenization. Current AI models are often trained on datasets that exhibit a Western-centric bias, which carries the risk of marginalizing non-Western musical traditions and hindering overall cultural diversity in AI-generated outputs. Furthermore, an over-reliance on AI tools by human creators could lead to "cognitive atrophy," where human creative faculties are diminished. When numerous users depend on the same generative models, there is an inherent risk of aesthetic conformity, where AI outputs begin to "look and sound alike," leading to a lack of distinctiveness in the creative landscape. This raises profound questions about originality, authenticity, and the ethical implications of generating music or art that mimics deceased artists, potentially blurring the lines of artistic integrity and representation.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Challenges and Ethical Implications - Risk of Creative Homogenization and Dilution of Artistic Uniqueness', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                        {
+                            title: 'V. Challenges and Ethical Implications - Addressing Cultural Sensitivity and Algorithmic Bias in AI-Generated Content',
+                            content: 'Concerns regarding equity, inclusivity, and ethical governance are paramount for AI\'s broader societal impact. Unmanaged AI can exacerbate existing inequalities, and this risk extends significantly to creative outputs. Studies have revealed biases in AI facial recognition technologies, and similar biases can inadvertently manifest in creative content generated by AI, perpetuating stereotypes or excluding underrepresented voices. UNESCO\'s Recommendation on the Ethics of Artificial Intelligence, issued in November 2021, underscores core principles such as human rights, human dignity, transparency, fairness, and the necessity of human oversight in AI systems. To address these issues comprehensively within the creative industries, the Multi-Dimensional Ethics Framework (MDEF) has been proposed. This framework integrates principles of originality, cultural sensitivity, bias mitigation, transparency, and sustainability, offering a structured approach to ethical AI deployment in creative domains.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Challenges and Ethical Implications - Addressing Cultural Sensitivity and Algorithmic Bias in AI-Generated Content', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                    ]
+                }
+            },
+            {
+                id: 'q3',
+                question: 'Establishing equitable intellectual property frameworks for iterative multi-agent creative workflows, particularly concerning granular, real-time attribution and automated compensation for human and AI contributions, remains a critical challenge for blockchain-enabled smart contract and tokenomics models in the evolving digital creative economy.',
+                details: {
+                    scientificNovelty: 'Current IP frameworks struggle with AI-generated content and co-creation. This question proposes a novel application of blockchain and smart contracts to create a dynamic, transparent system for IP management and compensation in complex, multi-agent creative projects. It moves beyond traditional legal disputes to a proactive, automated solution for value distribution and attribution. This builds on research into AI-based tokens and decentralized economic models.',
+                    relatedResearch: [
+                        { text: '"AI-generated content and IP rights: Challenges and policy considerations"', link: 'https://www.diplomacy.edu/blog/ai-generated-content-and-ip-rights-challenges-and-policy-considerations/' },
+                        { text: '"Which Contributions Deserve Credit? Perceptions of Attribution in Human-AI"', link: 'https://arxiv.org/abs/2502.18357' },
+                        { text: '"The convergence of blockchain and artificial intelligence (AI) has led to the emergence of AI-based tokens..."', link: 'https://arxiv.org/abs/2505.07828' },
+                        { text: '"From 3D product creation and agentic AI, to using blockchain to ensure fair compensation and a more equitable ecosystem..."', link: 'https://seamless.pi.tv/article/decentralized-finance-in-digital-fashion-web3-solutions-for-a-transparent-and-equitable-future/' },
+                        { text: '"How to Design Tokenomics"', link: 'https://blacktokenomics.com/how-to-design-tokenomics/' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'V. Challenges and Ethical Implications - Intellectual Property and Authorship - Navigating "Fair Use," Copyright, and the Legality of Training Data',
+                            content: 'The advent of AI fundamentally challenges the long-held premise that creativity is exclusively a human ability, thereby threatening existing intellectual property (IP) regimes designed to incentivize human innovation. Ongoing legal battles highlight the complexities surrounding "fair use" in the context of training AI models, questions of whether AI models can be considered sole "authors" of generated works, and determining liability for infringement. Publishers and creators contend that the unauthorized and uncompensated use of vast quantities of copyrighted text, video, and audio for AI training constitutes a "massive rip-off". While AI companies frequently invoke the "fair use" doctrine, arguing that their use of copyrighted material for training is transformative and does not directly compete with the original works, the stance of the US Copyright Office is that AI-generated content lacking human authorship is not eligible for copyright protection. Furthermore, the 2024 DABUS case in the UK affirmed that AI-generated inventions cannot be patented, underscoring the legal system\'s hesitation to grant IP rights to AI as an inventor. The ongoing legal disputes and the absence of clear standards regarding "fair use" for AI training data and copyright for AI-generated content create significant legal uncertainty and economic threats for human creators. This situation suggests a potential for a substantial transfer of value from original content creators, whose work forms the basis for AI training, to AI developers who profit from the models. If intellectual property frameworks fail to adapt adequately, this economic pressure could contribute to what is termed the "creative double bind," where artists simultaneously desire AI\'s powerful capabilities yet fear its disruptive potential for their livelihoods. This dynamic could lead to market instability and a reduction in incentives for human creative endeavors.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Challenges and Ethical Implications - Intellectual Property and Authorship - Navigating "Fair Use," Copyright, and the Legality of Training Data', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                    ]
+                }
+            },
+            {
+                id: 'q4',
+                question: 'The long-term psychological and sociological transformation of professional artists\' creative identity, sense of purpose, and perceived artistic agency in a hybrid human-agentic AI co-creation ecosystem presents a critical area for understanding, particularly concerning their self-perception of originality and the design of supportive psychological interventions.',
+                details: {
+                    scientificNovelty: 'While some studies touch on the psychological impact of AI on creativity, few focus on longitudinal effects or the specific nuances of multi-agent AI systems and their increasing autonomy. This question seeks to understand the deeper psychological shifts and explore design principles that actively promote human flourishing and agency, rather than just mitigating negative impacts. This builds on existing research on AI\'s impact on individual and collective creativity, human perception of AI art, and the concept of "creative self-beliefs".',
+                    relatedResearch: [
+                        { text: '"Generative AI enhances individual creativity but reduces the collective diversity of novel content"', link: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10842340/' },
+                        { text: '"How Autonomy of Artificial Intelligence Technology and User Agency Influence AI Perceptions and Attitudes..."', link: 'https://www.tandfonline.com/doi/full/10.1080/08838151.2024.2323861' },
+                        { text: '"Am I Still Creative? The Effect of Artificial Intelligence on Creative Self-Beliefs"', link: 'https://www.researchgate.net/publication/380757917_Am_I_Still_Creative_The_Effect_of_Artificial_Intelligence_on_Creative_Self-Beliefs' },
+                        { text: '"Human perception of art in the age of artificial intelligence"', link: 'https://www.researchgate.net/publication/380302324_Human_perception_of_art_in_the_age_of_artificial_intelligence' },
+                        { text: '"Cognitio Emergens: A Framework for Co-Evolutionary Human-AI Scientific Collaboration"', link: 'https://arxiv.org/abs/2505.03105' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'V. Challenges and Ethical Implications - The "Creative Double Bind": Balancing Opportunity and Displacement',
+                            content: 'Artists find themselves in a "creative double bind," experiencing a simultaneous desire to embrace AI for its transformative potential and a deep-seated fear of its capacity to displace their roles. The potential for AI to automate music creation, for instance, poses a direct threat to the livelihoods of human musicians, necessitating proactive reskilling and upskilling initiatives to mitigate potential displacement. Recent Hollywood strikes have brought widespread attention to the anxieties among creatives regarding AI\'s potential to devalue their contributions or use their likeness without proper consent, fueling industry-wide debates about the future of human artistry.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Challenges and Ethical Implications - The "Creative Double Bind": Balancing Opportunity and Displacement', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                    ]
+                }
+            },
+            {
+                id: 'q5',
+                question: 'Realizing adaptive human-in-the-loop (HITL) oversight models and real-time ethical monitoring frameworks for multi-agent AI creative systems, particularly in providing actionable, context-aware insights into emergent behaviors and complex decision-making, presents a critical necessity for fostering trust, enhancing informed creative direction, and preserving human artistic control.',
+                details: {
+                    scientificNovelty: 'While HITL and Explainable AI (XAI) are recognized for ethical AI, their application to multi-agent creative systems with emergent behaviors and the provision of actionable, real-time insights for human artists represents a novel area. This question seeks to integrate these concepts into a dynamic governance model that supports artistic integrity and ethical intervention.',
+                    relatedResearch: [
+                        { text: '"Responsible Agentic AI"', link: 'https://www.pwc.com/gx/en/issues/ai/responsible-agentic-ai.html' },
+                        { text: '"Human-in-the-Loop (HITL) Design in Advisory and Assistive Systems"', link: 'https://techsursolutions.com/human-in-the-loop-hitl-design-in-advisory-and-assistive-systems/' },
+                        { text: '"Explainable AI (XAI): Making AI Decisions Transparent"', link: 'https://focalx.ai/blog/explainable-ai-xai-making-ai-decisions-transparent' },
+                        { text: '"Explainable AI in Multi-Agent Systems: Advancing Transparency with Layered Prompting"', link: 'https://www.researchgate.net/publication/381155989_Explainable_AI_in_Multi-Agent_Systems_Advancing_Transparency_with_Layered_Prompting' },
+                        { text: '"Navigating the Artistic AI Maze: A Dive into the Multi-Dimensional Ethics Framework"', link: 'https://opentools.ai/news/navigating-the-artistic-ai-maze-a-dive-into-the-multi-dimensional-ethics-framework' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'V. Challenges and Ethical Implications - Ensuring Transparency, Accountability, and Considering Environmental Impact',
+                            content: 'The opaque nature of some AI systems can erode trust and lead to misuse, particularly in sensitive contexts such as political campaigns where AI-generated content might blur the lines between truth and manipulation. To counter this, the MDEF advocates for the implementation of provenance pipelines to trace the creation process and co-creation logs to document human-AI interactions. These measures promote accountability and ensure that AI systems operate transparently. More broadly, AI systems should be auditable and traceable to ensure responsible development and deployment. Beyond these ethical considerations, the environmental impact of AI is gaining increasing scrutiny. Training large AI models demands significant computational resources, which contributes to a substantial carbon footprint. To address this, tools like carbon dashboards and energy intensity scores are being developed to monitor and manage these impacts, aiming to align AI\'s growth with sustainable practices. These governance mechanisms are crucial for ensuring that the benefits of AI in the creative sector are realized responsibly and sustainably.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Challenges and Ethical Implications - Ensuring Transparency, Accountability, and Considering Environmental Impact', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                    ]
+                }
+            },
+            {
+                id: 'q6',
+                question: 'The economic viability of decentralized agentic creative platforms, particularly in ensuring continuous value generation, equitable revenue distribution, and transparent intellectual property management for independent artists, presents a significant challenge for sustainable tokenomics models and decentralized autonomous organization (DAO) architectures in mitigating market saturation.',
+                details: {
+                    scientificNovelty: 'While decentralized platforms and DAOs are emerging, the specific design of sustainable tokenomics for multi-agent AI creative projects that ensures equitable value capture and IP transparency is a novel area. This question seeks to develop economic models that directly address the challenges of market saturation and fair compensation for human and AI contributions. This builds on research into decentralized platforms and DAOs.',
+                    relatedResearch: [
+                        { text: '"Global Dynamics of Digital Platforms: Transforming Creative Industries with Equity and Sustainability"', link: 'https://www.researchgate.net/publication/372074351_Few-Shot_Learning_in_Computer_Vision_Overcoming_Data_Scarcity' },
+                        { text: '"The Future of DAOs is Powered by AI"', link: 'https://aragon.org/blog/the-future-of-daos-is-powered-by-ai' },
+                        { text: '"The convergence of blockchain and artificial intelligence (AI) has led to the emergence of AI-based tokens..."', link: 'https://arxiv.org/abs/2505.07828' },
+                        { text: '"How to Design Tokenomics"', link: 'https://blacktokenomics.com/how-to-design-tokenomics/' },
+                        { text: 'Artsi.ai : An AI-made marketplace dedicated to AI creators and artists', link: 'https://artsi.ai/' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'II. Understanding the Democratization of Artificial Intelligence - Defining AI Democratization: Principles of Equitable Access, Participation, and Benefits',
+                            content: 'The concept of AI democratization extends beyond simply making AI tools available; it is a comprehensive effort to ensure equitable access to, participation in, and benefits from AI technologies for societal well-being. This involves a deliberate push to broaden access to AI tools and actively incorporate diverse perspectives in their development and regulation. Central to this definition are several key components. Firstly, the democratization of AI use focuses on enhancing the usability of AI tools for a wide array of individuals, including those without extensive technical backgrounds. This ensures that the power of AI is not confined to a select few. Secondly, community engagement is paramount, advocating for the active involvement of local communities and varied social groups in the design of AI systems. This participatory approach aims to ensure that AI development genuinely serves societal needs and yields broad benefits. Thirdly, there is a focus on the equitable distribution of economic gains generated by AI, striving to prevent wealth concentration and ensure that the prosperity created by AI is shared fairly across society. Finally, democratic AI governance is crucial, ensuring that decisions pertaining to AI\'s deployment, advancement, and economic advantages are rooted in the preferences and requirements of the populations it impacts. This foundational definition is critical as it establishes the ethical and societal framework for the entire discussion within this report. It shifts the discourse from a narrow focus on technological capability to a broader consideration of fairness, inclusivity, and accountability—dimensions that are particularly salient in the creative sector, where issues of artistic ownership, compensation, and cultural representation are deeply intertwined with AI adoption. The emphasis on equitable access, participation, and benefits underscores a significant concern: without diligent management, AI has the potential to exacerbate existing inequalities. This suggests a direct relationship where the absence of careful oversight in AI democratization could lead to adverse social consequences, especially for vulnerable creative communities. Such communities might face widening disparities in access to advanced tools, diminished economic opportunities, or even the marginalization of their unique cultural expressions if AI systems are not developed and governed inclusively. The potential for AI to solve complex social problems is immense, but its capacity to deepen existing divides if not managed with equity and inclusivity in mind is equally critical.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, II. Understanding the Democratization of Artificial Intelligence - Defining AI Democratization: Principles of Equitable Access, Participation, and Benefits', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#understanding-democratization' }
+                        },
+                    ]
+                }
+            },
+            {
+                id: 'q7',
+                question: 'Transforming creative education for future professionals, particularly in cultivating human-centric creative intelligence through adaptive, interdisciplinary AI literacy curricula that integrate multi-agent AI orchestration skills, advanced ethical reasoning, and critical evaluation of AI outputs, presents a significant imperative for preparing them for leadership roles in the evolving AI-driven creative landscape.',
+                details: {
+                    scientificNovelty: 'While general AI literacy initiatives exist 5, this question proposes a curriculum specifically tailored for creative professionals, emphasizing the unique skills needed to orchestrate multi-agent AI systems and apply ethical reasoning within creative contexts. It moves beyond basic tool usage to fostering "AI-creative intelligence" and leadership.6 This builds on frameworks for AI literacy in education.',
+                    relatedResearch: [
+                        { text: '"Why AI literacy is now a core competency in education"', link: 'https://www.weforum.org/stories/2025/05/why-ai-literacy-is-now-a-core-competency-in-education/' },
+                        { text: '"AI in Art Education: Balancing Benefits and Challenges"', link: 'https://www.tshanywhere.org/post/ai-art-education-benefits-challenges' },
+                        { text: '"Key Skills Professionals Need to Work with Agentic AI"', link: 'https://digitaldefynd.com/blog/key-skills-professionals-need-to-work-with-agentic-ai/' },
+                        { text: '"A Framework for Human-Centric AI-First Teaching"', link: 'https://www.aacsb.edu/insights/articles/2024/02/a-framework-for-human-centric-ai-first-teaching' },
+                        { text: '"AI-Powered Educational Agents: Opportunities, Innovations, and Ethical Challenges"', link: 'https://www.researchgate.net/publication/380757917_Am_I_Still_Creative_The_Effect_of_Artificial_Intelligence_on_Creative_Self-Beliefs' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'V. Socio-Economic Shifts - Redefining Creative Professions: Job Redefinition, Upskilling, and Potential Displacement',
+                            content: 'The prevailing view is that AI will redefine, rather than eliminate, creative jobs. Repetitive and lower-level tasks are increasingly expected to be automated, thereby allowing human creatives to concentrate on higher-level creative thinking, strategic decisions, and unique human insights. This shift is already giving rise to new roles, such as "prompt engineers," AI video editors, and AI content strategists, which demand hybrid skill sets combining traditional creative expertise with new technological competencies. However, the potential for job displacement remains a significant concern, emphasizing the critical need for proactive reskilling and upskilling initiatives to prepare the workforce for these evolving demands. The consensus that AI will "redefine" rather than "replace" creative jobs points to a substantial workforce transformation. This transformation necessitates proactive upskilling and AI literacy initiatives to equip creatives with what can be termed "AI-creative intelligence". This ensures that artists and designers can effectively leverage AI as a collaborative tool, remaining competitive and relevant in the evolving creative economy. Without these concerted efforts, the very "democratization" of tools, intended to broaden participation, might paradoxically lead to a new form of digital divide, where only those with the requisite AI skills can fully participate and thrive.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Socio-Economic Shifts - Redefining Creative Professions: Job Redefinition, Upskilling, and Potential Displacement', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                    ]
+                }
+            },
+            {
+                id: 'q8',
+                question: 'The realization of interactive Explainable AI (XAI) tools within multi-agent AI creative platforms, particularly in providing human artists with actionable, real-time insights into the emergent behaviors and complex decision-making of AI agents, presents a critical necessity for fostering trust, enhancing informed creative direction, and enabling more effective human-AI co-adaptation.',
+                details: {
+                    scientificNovelty: 'While HITL and Explainable AI (XAI) are recognized for ethical AI, their application to multi-agent creative systems with emergent behaviors and the provision of actionable, real-time insights for human artists represents a novel area. This question seeks to integrate these concepts into a dynamic governance model that supports artistic integrity and ethical intervention.',
+                    relatedResearch: [
+                        { text: '"Responsible Agentic AI"', link: 'https://www.pwc.com/gx/en/issues/ai/responsible-agentic-ai.html' },
+                        { text: '"Human-in-the-Loop (HITL) Design in Advisory and Assistive Systems"', link: 'https://techsursolutions.com/human-in-the-loop-hitl-design-in-advisory-and-assistive-systems/' },
+                        { text: '"Explainable AI (XAI): Making AI Decisions Transparent"', link: 'https://focalx.ai/blog/explainable-ai-xai-making-ai-decisions-transparent' },
+                        { text: '"Explainable AI in Multi-Agent Systems: Advancing Transparency with Layered Prompting"', link: 'https://www.researchgate.net/publication/381155989_Explainable_AI_in_Multi-Agent_Systems_Advancing_Transparency_with_Layered_Prompting' },
+                        { text: '"Navigating the Artistic AI Maze: A Dive into the Multi-Dimensional Ethics Framework"', link: 'https://opentools.ai/news/navigating-the-artistic-ai-maze-a-dive-into-the-multi-dimensional-ethics-framework' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'V. Challenges and Ethical Implications - Ensuring Transparency, Accountability, and Considering Environmental Impact',
+                            content: 'The opaque nature of some AI systems can erode trust and lead to misuse, particularly in sensitive contexts such as political campaigns where AI-generated content might blur the lines between truth and manipulation. To counter this, the MDEF advocates for the implementation of provenance pipelines to trace the creation process and co-creation logs to document human-AI interactions. These measures promote accountability and ensure that AI systems operate transparently. More broadly, AI systems should be auditable and traceable to ensure responsible development and deployment. Beyond these ethical considerations, the environmental impact of AI is gaining increasing scrutiny. Training large AI models demands significant computational resources, which contributes to a substantial carbon footprint. To address this, tools like carbon dashboards and energy intensity scores are being developed to monitor and manage these impacts, aiming to align AI\'s growth with sustainable practices. These governance mechanisms are crucial for ensuring that the benefits of AI in the creative sector are realized responsibly and sustainably.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Challenges and Ethical Implications - Ensuring Transparency, Accountability, and Considering Environmental Impact', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                    ]
+                }
+            },
+            {
+                id: 'q9',
+                question: 'The environmental sustainability of large-scale, continuously operating multi-agent AI systems for creative production presents a critical challenge, necessitating novel methodologies and Green AI frameworks for accurately measuring and minimizing dynamic energy consumption and carbon footprint through real-time carbon-aware computing and resource optimization strategies across the entire AI lifecycle.',
+                details: {
+                    scientificNovelty: 'The environmental sustainability of large-scale, continuously operating multi-agent AI systems for creative production presents a critical challenge, necessitating novel methodologies and Green AI frameworks for accurately measuring and minimizing dynamic energy consumption and carbon footprint through real-time carbon-aware computing and resource optimization strategies across the entire AI lifecycle. This builds on research quantifying AI\'s carbon footprint and the principles of multi-agent systems for energy optimization.',
+                    relatedResearch: [
+                        { text: '"The environmental impact of generative AI"', link: 'https://news.mit.edu/topic/ai-carbon-footprint' },
+                        { text: '"AI\'s carbon footprint: How does the popularity of artificial intelligence affect the climate?"', link: 'https://www.planbe.eco/en/magazine/ki-co2-footprint' },
+                        { text: '"Green AI, also known as sustainability-friendly AI, is an approach that focuses on creating artificial intelligence systems that are both high-performing and environmentally responsible."', link: 'https://www.almawave.it/en/news/green-ai-for-a-sustainable-future/' },
+                        { text: '"Collaborative intelligence: AI and human expertise for sustainability"', link: 'https://www.se.com/ww/en/perspectives/collaborative-intelligence-ai-and-human-expertise-for-sustainability/' },
+                        { text: '"Measuring the Carbon Footprint of AI Matters (Especially in Marketing)"', link: 'https://scope3.com/insights/ai-carbon-footprint/' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'V. Challenges and Ethical Implications - Ensuring Transparency, Accountability, and Considering Environmental Impact',
+                            content: 'The opaque nature of some AI systems can erode trust and lead to misuse, particularly in sensitive contexts such as political campaigns where AI-generated content might blur the lines between truth and manipulation. To counter this, the MDEF advocates for the implementation of provenance pipelines to trace the creation process and co-creation logs to document human-AI interactions. These measures promote accountability and ensure that AI systems operate transparently. More broadly, AI systems should be auditable and traceable to ensure responsible development and deployment. Beyond these ethical considerations, the environmental impact of AI is gaining increasing scrutiny. Training large AI models demands significant computational resources, which contributes to a substantial carbon footprint. To address this, tools like carbon dashboards and energy intensity scores are being developed to monitor and manage these impacts, aiming to align AI\'s growth with sustainable practices. These governance mechanisms are crucial for ensuring that the benefits of AI in the creative sector are realized responsibly and sustainably.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Challenges and Ethical Implications - Ensuring Transparency, Accountability, and Considering Environmental Impact', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                    ]
+                }
+            },
+            {
+                id: 'q10',
+                question: 'The revitalization and contemporary adaptation of endangered or marginalized artistic traditions, particularly through the authentic reconstruction and generation of culturally sensitive works from sparse historical datasets, presents a significant opportunity for adaptive multi-agent AI frameworks leveraging few-shot learning and human-in-the-loop cultural feedback mechanisms.',
+                details: {
+                    scientificNovelty: 'While AI is used for cultural heritage preservation, the challenge lies in working with limited and fragmented data for endangered traditions and ensuring authentic cultural representation without appropriation. This question proposes combining multi-agent systems with few-shot learning and continuous human feedback to achieve genuine cultural revitalization and transmission.',
+                    relatedResearch: [
+                        { text: '"Generative AI for Cultural Heritage Preservation"', link: 'https://www.researchgate.net/publication/380757917_Am_I_Still_Creative_The_Effect_of_Artificial_Intelligence_on_Creative_Self-Beliefs' },
+                        { text: '"AI-Powered Preservation of Endangered Languages"', link: 'https://www.historicacanada.ca/sites/default/files/ai-powered-preservation-of-endangered-languages.pdf' },
+                        { text: '"Multi-Agent AI Framework Aims to Improve Cultural Adaptation in AI Translation"', link: 'https://slator.com/multi-agent-ai-framework-aims-to-improve-cultural-adaptation-in-ai-translation/' },
+                        { text: '"Few-Shot Learning in Computer Vision: Overcoming Data Scarcity"', link: 'https://www.researchgate.net/publication/372074351_Few-Shot_Learning_in_Computer_Vision_Overcoming_Data_Scarcity' },
+                        { text: '"Using AI to preserve and share cultural heritage"', link: 'https://news.miami.edu/stories/2023/12/using-ai-to-preserve-and-share-cultural-heritage.html' },
+                    ],
+                    additionalInfo: [
+                        {
+                            title: 'V. Challenges and Ethical Implications - Risk of Creative Homogenization and Dilution of Artistic Uniqueness',
+                            content: 'A significant concern is the potential for creative homogenization. Current AI models are often trained on datasets that exhibit a Western-centric bias, which carries the risk of marginalizing non-Western musical traditions and hindering overall cultural diversity in AI-generated outputs. Furthermore, an over-reliance on AI tools by human creators could lead to "cognitive atrophy," where human creative faculties are diminished. When numerous users depend on the same generative models, there is an inherent risk of aesthetic conformity, where AI outputs begin to "look and sound alike," leading to a lack of distinctiveness in the creative landscape. This raises profound questions about originality, authenticity, and the ethical implications of generating music or art that mimics deceased artists, potentially blurring the lines of artistic integrity and representation.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Challenges and Ethical Implications - Risk of Creative Homogenization and Dilution of Artistic Uniqueness', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                        {
+                            title: 'V. Challenges and Ethical Implications - Addressing Cultural Sensitivity and Algorithmic Bias in AI-Generated Content',
+                            content: 'Concerns regarding equity, inclusivity, and ethical governance are paramount for AI\'s broader societal impact. Unmanaged AI can exacerbate existing inequalities, and this risk extends significantly to creative outputs. Studies have revealed biases in AI facial recognition technologies, and similar biases can inadvertently manifest in creative content generated by AI, perpetuating stereotypes or excluding underrepresented voices. UNESCO\'s Recommendation on the Ethics of Artificial Intelligence, issued in November 2021, underscores core principles such as human rights, human dignity, transparency, fairness, and the necessity of human oversight in AI systems. To address these issues comprehensively within the creative industries, the Multi-Dimensional Ethics Framework (MDEF) has been proposed. This framework integrates principles of originality, cultural sensitivity, bias mitigation, transparency, and sustainability, offering a structured approach to ethical AI deployment in creative domains.',
+                            reference: { text: 'AI Democratization, Creative Empowerment, V. Challenges and Ethical Implications - Addressing Cultural Sensitivity and Algorithmic Bias in AI-Generated Content', link: AI_DEMOCRATIZATION_REPORT_BASE_URL + '/#challenges-and-ethical-implications' }
+                        },
+                    ]
+                }
+            },
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionsContainer = document.getElementById('questions-container');
+            const sidebarNav = document.getElementById('sidebar-nav');
+            let openQuestionId = null;
+
+            function renderQuestions() {
+                questionsContainer.innerHTML = ''; // Clear existing content
+                sidebarNav.innerHTML = ''; // Clear sidebar nav
+
+                researchQuestionsData.forEach((q, index) => {
+                    // Render sidebar item
+                    const sidebarLink = document.createElement('a');
+                    sidebarLink.href = `#${q.id}`;
+                    sidebarLink.className = `sidebar-nav-item ${openQuestionId === q.id ? 'active' : ''}`;
+                    sidebarLink.textContent = `${index + 1}. ${q.question.substring(0, 50)}...`; // Truncate for sidebar
+                    sidebarLink.onclick = (e) => {
+                        e.preventDefault(); // Prevent default anchor jump
+                        toggleQuestion(q.id);
+                        // Smooth scroll to the question card in the main content
+                        const targetElement = document.getElementById(q.id);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    };
+                    sidebarNav.appendChild(sidebarLink);
+
+                    // Render question card in main content
+                    const questionCard = document.createElement('div');
+                    questionCard.className = 'question-card';
+                    questionCard.id = q.id; // Set ID for scrolling target
+
+                    const questionButton = document.createElement('button');
+                    questionButton.className = `question-button ${openQuestionId === q.id ? 'active' : ''}`;
+                    questionButton.innerHTML = `
+                        <span>${q.question}</span>
+                        <svg class="w-6 h-6 transform transition-transform duration-300 ${openQuestionId === q.id ? 'rotate-180' : ''}"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    `;
+                    questionButton.onclick = () => toggleQuestion(q.id);
+                    questionCard.appendChild(questionButton);
+
+                    if (openQuestionId === q.id) {
+                        const detailsDiv = document.createElement('div');
+                        detailsDiv.className = 'question-details';
+
+                        // Scientific Novelty & Methodological Development
+                        detailsDiv.innerHTML += `
+                            <h3 class="details-heading">Scientific Novelty & Methodological Development:</h3>
+                            <p class="details-paragraph">${q.details.scientificNovelty}</p>
+                        `;
+
+                        // Highly Closely Related Research Publications and/or Tools
+                        detailsDiv.innerHTML += `
+                            <h3 class="details-heading">Highly Closely Related Research Publications and/or Tools:</h3>
+                            <ul class="list-disc list-inside space-y-2 mb-6">
+                                ${q.details.relatedResearch.map(ref => `
+                                    <li class="leading-relaxed">
+                                        ${ref.link ? `<a href="${ref.link}" target="_blank" rel="noopener noreferrer" class="list-item-link">${ref.text}</a>` : ref.text}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        `;
+
+                        // Additional Relevant Information
+                        if (q.details.additionalInfo.length > 0) {
+                            detailsDiv.innerHTML += `
+                                <h3 class="details-heading">Additional Relevant Information:</h3>
+                                <div class="space-y-4">
+                                    ${q.details.additionalInfo.map(info => `
+                                        <div class="additional-info-card">
+                                            <h4 class="additional-info-title">${info.title}</h4>
+                                            <p class="additional-info-content">${info.content}</p>
+                                            <p class="additional-info-source">
+                                                Source: ${info.reference && info.reference.link ? `<a href="${info.reference.link}" target="_blank" rel="noopener noreferrer" class="list-item-link">${info.reference.text}</a>` : info.reference.text}
+                                            </p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `;
+                        }
+                        questionCard.appendChild(detailsDiv);
+                    }
+                    questionsContainer.appendChild(questionCard);
+                });
+            }
+
+            function toggleQuestion(id) {
+                openQuestionId = openQuestionId === id ? null : id;
+                renderQuestions(); // Re-render to update the display
+            }
+
+            renderQuestions(); // Initial render
+        });
+    </script>
+</body>
+</html>
