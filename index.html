@@ -17,7 +17,14 @@
             color: #333333; /* Dark gray for general text */
             min-height: 100vh;
             display: flex;
+            flex-direction: column; /* Stack sidebar, main content, and footer vertically */
             overflow-y: auto; /* Allow the entire body to scroll if content overflows */
+        }
+
+        /* Main wrapper for sidebar and content */
+        .main-wrapper {
+            display: flex;
+            flex: 1; /* Take remaining space */
         }
 
         /* Sidebar Styling */
@@ -196,7 +203,7 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            body {
+            .main-wrapper {
                 flex-direction: column; /* Stack sidebar and main content on small screens */
             }
             .sidebar {
@@ -230,28 +237,78 @@
                 margin-bottom: 1rem;
             }
         }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #E0E0E0;
+            border-top: 1px solid #CCCCCC;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content p {
+            margin: 0.5rem 0;
+            color: #333333;
+            font-size: 0.9rem;
+        }
+
+        .footer-content a {
+            color: #4A90E2;
+            text-decoration: none;
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 1rem 0;
+                margin-top: 1rem;
+            }
+            .footer-content {
+                padding: 0 1rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="sidebar" id="sidebar">
-        <h2 class="sidebar-title">Research Questions</h2>
-        <nav id="sidebar-nav">
-            <!-- Sidebar navigation items will be dynamically loaded here -->
-        </nav>
-    </div>
+    <div class="main-wrapper">
+        <div class="sidebar" id="sidebar">
+            <h2 class="sidebar-title">Research Questions</h2>
+            <nav id="sidebar-nav">
+                <!-- Sidebar navigation items will be dynamically loaded here -->
+            </nav>
+        </div>
 
-    <div class="main-content-wrapper">
-        <div class="container" id="main-container">
-            <h1 class="header-title">
-                Novel Research Questions: AI & Creative Sector
-            </h1>
+        <div class="main-content-wrapper">
+            <div class="container" id="main-container">
+                <h1 class="header-title">
+                    Novel Research Questions: AI & Creative Sector
+                </h1>
 
-            <div id="questions-container">
-                <!-- Questions will be dynamically loaded here by JavaScript -->
+                <div id="questions-container">
+                    <!-- Questions will be dynamically loaded here by JavaScript -->
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; Ganesh Hegde 2025</p>
+            <p>Contact: <a href="mailto:adhvaitaganesh@gmail.com">adhvaitaganesh@gmail.com</a></p>
+        </div>
+    </footer>
 
     <script>
         // Base path to the report hosted in the Canvas environment
